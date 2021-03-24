@@ -106,12 +106,28 @@ const getRandomQuote = function() {
  return quotes[randomIndex];
 }
 
-console.log(getRandomQuote());
-
 /***
  * `printQuote` function
 ***/
-
+const printQuote = function() {
+ let thisQuote = getRandomQuote(); //get a random quote
+ let pageContent = `
+ <p class="quote">${thisQuote.quote}</p>
+ <p class="source">${thisQuote.source}
+ `; //This is the minimum HTML for each quote.
+ /***
+ * Use hasOwnProperty() to see if the object contains optional properties. Include them in the HTML string if they exist.
+ * Docs: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty
+ ***/
+ if (thisQuote.hasOwnProperty('citation')) {
+  pageContent += `<span class="citation">${thisQuote.citation}</span>`;
+ }
+ if (thisQuote.hasOwnProperty('year')) {
+  pageContent += `<span class="year">${thisQuote.year}</span>`;
+ }
+ pageContent += `</p>`;
+ document.getElementById('quote-box').innerHTML = pageContent; //Update the page with new quote content.
+}
 
 
 /***
