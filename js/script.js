@@ -94,12 +94,19 @@ let quotes = [
 /***
  * `getRandomQuote` function
 ***/
+let currentIndex; //'currentIndex' will be compared to 'randomIndex' to ensure the same quote isn't repeated twice in a row.
 
 //Be sure to use the special notation for functions
 const getRandomQuote = function() {
-
+ do {
+  //Get a random number between 0 and the number of objects in the quotes array. This needs to happen before comparing the randomIndex to the currentIndex
+  randomIndex = Math.floor(Math.random() * quotes.length); 
+ } while (randomIndex === currentIndex) //Repeat the loop if randomIndex and currentIndex are the same.
+ currentIndex = randomIndex;
+ return quotes[randomIndex];
 }
 
+console.log(getRandomQuote());
 
 /***
  * `printQuote` function
