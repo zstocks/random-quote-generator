@@ -152,6 +152,10 @@ const printQuote = function() {
  if (thisQuote.hasOwnProperty('year')) {
   pageContent += `<span class="year">${thisQuote.year}</span>`;
  }
+ //the learnMore and link properties are optional properties that will link the user to the source material (i.e. a book, or a trailer)
+ if (thisQuote.hasOwnProperty('learnMore')) {
+  pageContent += `<span class="learnMore"><a href="${thisQuote.link}" target="_blank">${thisQuote.learnMore}</a></span>`;
+ }
  pageContent += `</p>`;
  randomizeBackgroundColor(); //set the background to a random color
  document.getElementById('quote-box').innerHTML = pageContent; //Update the page with new quote content

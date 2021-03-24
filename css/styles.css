@@ -115,6 +115,15 @@ h1 {
   font-style: normal;
 }
 
+.learnMore:before {
+  content: ", ";
+  font-style: normal;
+}
+
+.learnMore a {
+  color: #fff !important;
+}
+
 @media (min-width: 768px) {
   body {
     padding: 25px;
