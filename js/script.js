@@ -91,15 +91,7 @@ let quotes = [
 ]
 
 
-/***
- * `timerId` and `autoQuote` function
- * The timerId and `autoQuote` function set a timer that automatically changes the quote after 30 seconds.
- * `printQuote` will reset this timer, so if the button is used to call `printQuote`, the 30 second timer will restart.
-***/
-let timerId;
-function autoQuote() {
- timerId = setInterval(printQuote, 30000);
-}
+
 
 /***
  * `getRandomQuote` function
@@ -118,6 +110,10 @@ const getRandomQuote = function() {
 }
 
 /***
+ * `randomizeBackgroundColor` function
+***/
+
+/***
  * `printQuote` function
 ***/
 const printQuote = function() {
@@ -127,7 +123,7 @@ const printQuote = function() {
  <p class="source">${thisQuote.source}
  `; //This is the minimum HTML for each quote.
  /***
- * Use hasOwnProperty() to see if the object contains optional properties. Include them in the HTML string if they exist.
+ * Use hasOwnProperty() to see if the object contains optional properties. Include said properties in the HTML string if they exist.
  * Docs: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty
  ***/
  if (thisQuote.hasOwnProperty('citation')) {
@@ -138,12 +134,20 @@ const printQuote = function() {
  }
  pageContent += `</p>`;
  document.getElementById('quote-box').innerHTML = pageContent; //Update the page with new quote content.
- //Reset the 30 second timer
- clearInterval(timerId);
- timerId = setInterval(printQuote, 30000);
+ clearInterval(timerId); //Reset the 30 second timer
+ timerId = setInterval(printQuote, 20000);
 }
 
-autoQuote(); //Start the 30 second timer when page loads.
+/***
+ * `timerId` and `autoQuote` function
+ * The timerId and `autoQuote` function set a timer that automatically changes the quote after 20 seconds.
+ * `printQuote` will reset this timer, so if the button is used to call `printQuote`, the 20 second timer will restart.
+***/
+let timerId;
+function autoQuote() {
+ timerId = setInterval(printQuote, 20000);
+}
+autoQuote(); //Start the 20 second timer when page loads.
 
 /***
  * click event listener for the print quote button
