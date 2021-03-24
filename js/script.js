@@ -98,6 +98,7 @@ let currentIndex; //'currentIndex' will be compared to 'randomIndex' to ensure t
 
 //Be sure to use the special notation for functions
 const getRandomQuote = function() {
+ let randomIndex;
  do {
   //Get a random number between 0 and the number of objects in the quotes array. This needs to happen before comparing the randomIndex to the currentIndex
   randomIndex = Math.floor(Math.random() * quotes.length); 
