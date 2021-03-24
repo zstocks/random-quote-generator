@@ -92,6 +92,16 @@ let quotes = [
 
 
 /***
+ * `timerId` and `autoQuote` function
+ * The timerId and `autoQuote` function set a timer that automatically changes the quote after 30 seconds.
+ * `printQuote` will reset this timer, so if the button is used to call `printQuote`, the 30 second timer will restart.
+***/
+let timerId;
+function autoQuote() {
+ timerId = setInterval(printQuote, 30000);
+}
+
+/***
  * `getRandomQuote` function
 ***/
 let currentIndex; //'currentIndex' will be compared to 'randomIndex' to ensure the same quote isn't repeated twice in a row.
@@ -128,6 +138,9 @@ const printQuote = function() {
  }
  pageContent += `</p>`;
  document.getElementById('quote-box').innerHTML = pageContent; //Update the page with new quote content.
+ //Reset the 30 second timer
+ clearInterval(timerId);
+ timerId = setInterval(printQuote, 30000);
 }
 
 
