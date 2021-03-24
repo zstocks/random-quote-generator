@@ -143,6 +143,7 @@ const printQuote = function() {
  timerId = setInterval(printQuote, 30000);
 }
 
+autoQuote(); //Start the 30 second timer when page loads.
 
 /***
  * click event listener for the print quote button
