@@ -3,18 +3,7 @@ Treehouse FSJS Techdegree:
 project 1 - A Random Quote Generator
 ******************************************/
 
-// For assistance: 
-  // Check the "Project Resources" section of the project instructions
-  // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
-
-/*** 
- * `quotes` array 
-***/
-
-/*** 
-* To do:
-* 1. Add an additional property (such as tags) to print for all/some of the objects in the array
-***/
+// quotes` array
 let quotes = [
  {
   quote: 'When day comes, we step out of the shade aflame and unafraid. The new dawn blooms as we free it. For there is always light. If only we’re brave enough to see it. If only we’re brave enough to be it.',
@@ -102,15 +91,14 @@ let quotes = [
  }
 ]
 
-
-
-
-/***
- * `getRandomQuote` function
-***/
-let currentIndex; //'currentIndex' will be compared to 'randomIndex' to ensure the same quote isn't repeated twice in a row.
-
-//Be sure to use the special notation for functions
+//'currentIndex' will be compared to 'randomIndex' to ensure the same quote isn't repeated twice in a row.
+//must be set outside the scope of `getRandomQuote` so it will retain the value of the previously returned index each time `getRandomQuote` is called.
+let currentIndex; 
+/**
+* Selects a random object from the quotes array.
+*
+* @returns {object} A random object from the quotes array.
+*/
 const getRandomQuote = function() {
  let randomIndex;
  do {
@@ -121,54 +109,58 @@ const getRandomQuote = function() {
  return quotes[randomIndex];
 }
 
-/***
- * `getRandomColor` & `randomizeBackgroundColor` functions
-***/
+/**
+* Gets a random number.
+*
+* @returns {number} A random number between 0 and 250 to be used as part of an RGB color code.
+*/
 const getRandomColor = function() {
  return Math.floor(Math.random() * 251); //return a random number between 0 and 250
 }
 
+/**
+* Sets the background-color property of the body element to a random color.
+*/
 const randomizeBackgroundColor = function() {
  let rgbColor = `rgb(${getRandomColor()}, ${getRandomColor()}, ${getRandomColor()})`; //build an rgb color code
  document.querySelector('body').style.backgroundColor = rgbColor; //set the background color of the body to the random rgb color code
 }
 
-/***
- * `printQuote` function
-***/
+/**
+* Builds an HTML string using a randomly selected quote object and updates the page with the string.
+* Uses `randomizeBackgroundColor` to set the background color of the body to a random color.
+* Resets the 20 second timer for refreshing the quote.
+*/
 const printQuote = function() {
- let thisQuote = getRandomQuote(); //get a random quote
+ let thisQuote = getRandomQuote(); //get a random quote object from the quotes array
  let pageContent = `
  <p class="quote">${thisQuote.quote}</p>
  <p class="source">${thisQuote.source}
  `; //This is the minimum HTML for each quote.
- /***
- * Use hasOwnProperty() to see if the object contains optional properties. Include said properties in the HTML string if they exist.
- * Docs: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty
- ***/
+ /*  Use hasOwnProperty() to see if the object contains optional properties. Include said properties in the HTML string if they exist.
+  * Docs: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty */
  if (thisQuote.hasOwnProperty('citation')) {
   pageContent += `<span class="citation">${thisQuote.citation}</span>`;
  }
  if (thisQuote.hasOwnProperty('year')) {
   pageContent += `<span class="year">${thisQuote.year}</span>`;
  }
- //the learnMore and link properties are optional properties that will link the user to the source material (i.e. a book, or a trailer)
+ //the learnMore and link properties are optional properties that will link the user to the source material (i.e. a book, or a trailer) for the quote.
  if (thisQuote.hasOwnProperty('learnMore')) {
   pageContent += `<span class="learnMore"><a href="${thisQuote.link}" target="_blank">${thisQuote.learnMore}</a></span>`;
  }
  pageContent += `</p>`;
- randomizeBackgroundColor(); //set the background to a random color
- document.getElementById('quote-box').innerHTML = pageContent; //Update the page with new quote content
- clearInterval(timerId); //Reset the 20 second timer
+ randomizeBackgroundColor(); //set the background to a random color.
+ document.getElementById('quote-box').innerHTML = pageContent; //Update the page with new quote content.
+ //Reset the 20 second timer
+ clearInterval(timerId); 
  timerId = setInterval(printQuote, 20000);
 }
 
-/***
- * `timerId` and `autoQuote` function
- * The timerId and `autoQuote` function set a timer that automatically changes the quote after 20 seconds.
- * `printQuote` will reset this timer, so if the button is used to call `printQuote`, the 20 second timer will restart.
-***/
 let timerId;
+/**
+* Starts a timer that calls the `printQuote` function every 20 seconds.
+*/
 function autoQuote() {
  timerId = setInterval(printQuote, 20000);
 }
