@@ -99,7 +99,7 @@ let currentIndex;
 *
 * @returns {object} A random object from the quotes array.
 */
-const getRandomQuote = function() {
+const getRandomQuote = () => {
  let randomIndex;
  do {
   //Get a random number between 0 and the number of objects in the quotes array. This needs to happen before comparing the randomIndex to the currentIndex
@@ -114,14 +114,13 @@ const getRandomQuote = function() {
 *
 * @returns {number} A random number between 0 and 250 to be used as part of an RGB color code.
 */
-const getRandomColor = function() {
- return Math.floor(Math.random() * 251); //return a random number between 0 and 250
-}
+const getRandomColor = () => Math.floor(Math.random() * 251); //return a random number between 0 and 250
+console.log(getRandomColor);
 
 /**
 * Sets the background-color property of the body element to a random color.
 */
-const randomizeBackgroundColor = function() {
+const randomizeBackgroundColor = () => {
  let rgbColor = `rgb(${getRandomColor()}, ${getRandomColor()}, ${getRandomColor()})`; //build an rgb color code
  document.querySelector('body').style.backgroundColor = rgbColor; //set the background color of the body to the random rgb color code
 }
@@ -131,7 +130,7 @@ const randomizeBackgroundColor = function() {
 * Uses `randomizeBackgroundColor` to set the background color of the body to a random color.
 * Resets the 20 second timer for refreshing the quote.
 */
-const printQuote = function() {
+const printQuote = () => {
  let thisQuote = getRandomQuote(); //get a random quote object from the quotes array
  let pageContent = `
  <p class="quote">${thisQuote.quote}</p>
